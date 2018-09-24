@@ -2,17 +2,16 @@ package com.company.web.dao;
 
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Repository("blacklistDao")
 public class BlacklistDAOImpl implements BlacklistDAO<String> {
 
-    List<String> blacklistRepo;
-
+    Set<String> blacklistRepo;
 
     public BlacklistDAOImpl() {
-        blacklistRepo = new ArrayList<>();
+        blacklistRepo = new HashSet<>();
         blacklistRepo.add("111.32.4.5");
         blacklistRepo.add("222.22.43.5");
         blacklistRepo.add("193.12.0.1");
@@ -25,27 +24,17 @@ public class BlacklistDAOImpl implements BlacklistDAO<String> {
 
     @Override
     public String get(String ipToFind) {
-        String ip = blacklistRepo.stream()
-                .filter(ipInList -> ipToFind.equals(ipInList))
-                .findAny()
-                .orElse(null);
-        return ip;
+        if(blacklistRepo.contains(ipToFind)) return ipToFind;
+        return null;
     }
 
     @Override
     public boolean delete(String ipToRemove) {
-        List<String> toBeRemoved = new ArrayList<>();
-        blacklistRepo.forEach(ip -> {
-            if(ipToRemove.equals(ip)){
-                toBeRemoved.add(ip);
-            }
-        });
-
-        return  blacklistRepo.removeAll(toBeRemoved);
+        return blacklistRepo.remove(ipToRemove);
     }
 
     @Override
-    public List<String> findAll(){
+    public Set<String> findAll(){
         return blacklistRepo;
     }
 }

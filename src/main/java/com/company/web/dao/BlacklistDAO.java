@@ -1,6 +1,7 @@
 package com.company.web.dao;
 
 import java.util.List;
+import java.util.Set;
 
 public interface BlacklistDAO<T> {
 
@@ -10,5 +11,5 @@ public interface BlacklistDAO<T> {
 
     public boolean delete(T obj);
 
-    public List<T> findAll();
+    public Set<T> findAll();
 }

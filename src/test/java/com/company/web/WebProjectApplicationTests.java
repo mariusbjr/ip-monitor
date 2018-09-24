@@ -17,7 +17,7 @@ public class WebProjectApplicationTests {
 	@Autowired
 	AppController appController;
 
-	@Test
+	/*@Test
 	public void testCleanIp() {
 		String ip = "124";
 		String result = appController.checkIp(ip);
@@ -40,6 +40,6 @@ public class WebProjectApplicationTests {
 		appController.addIp(ip);
 		String addResult = appController.checkIp(ip);
 		Assert.assertEquals("Ip blacklisted!", addResult);
-	}
+	}*/
 
 }
